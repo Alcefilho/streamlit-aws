@@ -17,7 +17,7 @@ phases:
   post_build:
     commands:
       - echo Pushing the Docker images...
-      - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker push AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name”:"streamlit","imageUri":"%s"}]' $IMAGE_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
 artifacts:
