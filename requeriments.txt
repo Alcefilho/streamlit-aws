@@ -3,3 +3,4 @@ streamlit_wordcloud
 pandas
 altair
 matplotlib
+wordcloud

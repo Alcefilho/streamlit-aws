@@ -16,8 +16,12 @@ st.write(f"""
 This app is a demo od linkedin data :fire: :fire: 
 # bye
 """)
-
-uploaded_file = st.file_uploader("text here", type="csv") 
+uploaded_files = st.file_uploader("Choose a CSV file", accept_multiple_files=True, type="csv")
+for uploaded_file in uploaded_files:
+     bytes_data = uploaded_file.read()
+     st.write("filename:", uploaded_file.name)
+     st.write(bytes_data)
+#uploaded_file = st.file_uploader("text here", type="csv") 
 df = pd.read_csv(uploaded_file)
 summary = df.dropna(subset=['Position'], axis=0)['Position']
 all_summary = ' '.join(s for s in summary)
@@ -34,3 +38,23 @@ st.write(f"""
 st.info("""
         :point_left: **To get started, choose a demo on the left sidebar.**
     """)
+name = st.text_input('Name')
+if not name:
+    st.warning('Please input a name.')
+    st.stop()
+    st.success('Thank you for inputting a name.')
+
+
+import streamlit as st
+
+add_selectbox = st.sidebar.selectbox(
+    "O que você quer averiguar?",
+    ("Quem olhou meu perfil?", "Quais são meus amigos?", "Que profissão predomina meus amigos?")
+)
+
+
+#with st.beta_container():
+#    st.write("This is inside the container")
+#   # You can call any Streamlit command, including custom components:
+#    st.bar_chart(np.random.randn(50, 3))
+#st.write("This is outside the container")
