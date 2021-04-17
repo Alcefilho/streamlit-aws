@@ -1,1 +1,5 @@
 streamlit
+streamlit_wordcloud 
+pandas
+altair
+matplotlib
