@@ -4,4 +4,4 @@ WORKDIR /usr/src/app
 COPY requeriments.txt .
 RUN pip install  --no-cache-dir -r requeriments.txt
 COPY . .
-CMD streamlit run linkedin.py
+CMD streamlit run rema.py
