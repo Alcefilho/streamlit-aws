@@ -57,6 +57,10 @@ def download_link(object_to_download, download_filename, download_link_text):
 def alert():
     return(st.warning('Não aceitamos valores em branco ou negativos'))
 
+
+
+
+
 name = st.sidebar.selectbox(
     'Conversor de unidades',
     ('Unidades de Força e Pressão', 'Unidades de Comprimento')
@@ -102,6 +106,7 @@ st.write(f"""
 ## Programa para ajudar o constutor civíl tomar decisões 
 """)
 
+st.write('''[!fig](https://figrema.s3.amazonaws.com/rema-fig.jpg)''')
     
 carga_dist = st.number_input('Insira o valor (em Newton/metro) da carga distribuída w')
 if not carga_dist or carga_dist < 0:
