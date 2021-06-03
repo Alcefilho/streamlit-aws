@@ -62,25 +62,30 @@ name = st.sidebar.selectbox(
     ('Unidades de Força e Pressão', 'Unidades de Comprimento')
 )
 
+
+        
+        
 if name == "Unidades de Comprimento":
-    if st.sidebar.button('Metros para Milíetros'):
+    if st.sidebar.checkbox('Metros para Milíetros'):
         number = st.sidebar.number_input('Insira o valor em Metros')
-        st.continue()
-        st.sidebar.warning(f'''{number*1000} Milímetros''')
-    if st.sidebar.button('Milímetros para Metros'):
-        number2 = st.sidebar.number_input('Insira o valor em Metros')
-        st.sidebar.warning(f'''{number2/1000} Metros''')
+        st.sidebar.write(f''' **{number*1000}** Milímetros''')
+    if st.sidebar.checkbox('Milímetros para Metros'):
+        number2 = st.sidebar.number_input('Insira o valor em Milímetros')
+        st.sidebar.write(f''' **{number2/1000}** Metros''')
         
 if name == "Unidades de Força e Pressão":
-    if st.sidebar.button('Newtons/metro² para Pascal'):
+    if st.sidebar.checkbox('Newtons para KiloNewtons'):
+        number6 = st.sidebar.number_input('Insira o valor em N')
+        st.sidebar.write(f''' **{number6*1000}** KN''')
+    if st.sidebar.checkbox('Newtons/metro² para Pascal'):
         number3 = st.sidebar.number_input('Insira o valor em N/m²')
-        st.sidebar.warning(f'''{number3*1} Pa''')
-    if st.sidebar.button('GigaPascal para Pascal'):
+        st.sidebar.write(f''' **{number3*1}** Pa''')
+    if st.sidebar.checkbox('GigaPascal para Pascal'):
         number4 = st.sidebar.number_input('Insira o valor em GigaPascal')
-        st.sidebar.warning(f'''{number4*1000000000} Pascal''') 
-    if st.sidebar.button('MegaPascal para Pascal'):
+        st.sidebar.write(f''' **{number4*1000000000}** Pascal''') 
+    if st.sidebar.checkbox('MegaPascal para Pascal'):
         number5 = st.sidebar.number_input('Insira o valor em MegaPascal')
-        st.sidebar.warning(f'''{number5*1000000} Pascal''')           
+        st.sidebar.write(f''' **{number5*1000000}** Pascal''')           
             
     
 #if st.sidebar.button('Código fonte'):
@@ -157,13 +162,18 @@ else:
 D_b=(Fb*L_eb)/(A*E); D_c=(Fc*d)/(A*E); D_g=(D_c*L_ag)/(a+b); E_eb=D_b/e;E_dc=D_c/d
 
 st.write(f'''### Os deslocamentos dos pontos B, C e G são:
-B = **{round(D_b,2)}** m C = **{round(D_c,2)}** m G = **{round(D_g,2)}** m \n
+* Ponto B = **{round(D_b,2)}** m 
+* Ponto C = **{round(D_c,2)}** m 
+* Ponto G = **{round(D_g,2)}** m \n
 ---
 ### As deformações dos arames de apoio são: 
-Arame EB = **{round(E_eb,2)}** sem unidades Arame DC D = **{round(E_dc,2)}** sem unidades \n
+* Arame EB = **{round(E_eb,2)}** sem unidades Arame DC 
+* Arame D = **{round(E_dc,2)}** sem unidades \n
 ---
 ### As reações de apoio são:
-No ponto A:**{round(Fa,2)}** N/m E:**{round(Fb,2)}** N/m D:**{round(Fc,2)}** N/m
+* No ponto A = **{round(Fa,2)}** N/m 
+* No ponto E = **{round(Fb,2)}** N/m 
+* No ponto D = **{round(Fc,2)}** N/m
 ''')
    
 output = f'''\t RESULTADO DO RELATÓRIO DO REMA \n
