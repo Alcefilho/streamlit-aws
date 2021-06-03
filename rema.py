@@ -141,9 +141,14 @@ for i in range(1):
     if not d or d < 0 or d > e:
         st.warning('Lembrando que o comprimento DC tem que ser menor ou igual o comprimento EB')
         alert()
-        st.stop()    
+        st.stop()  
+    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro d")
+    if not diam or diam < 0:
+        st.warning('Lembrando que o comprimento DC tem que ser menor ou igual o comprimento EB')
+        alert()
+        st.stop()         
         
-ag = a+b+c; E = elasticidade; A = math.pi*d**2/4; L_ab = a; L_ag = ag; L_eb = e
+ag = a+b+c; E = elasticidade; A = math.pi*diam**2/4; L_ab = a; L_ag = ag; L_eb = e
 W = carga_dist; Fc = ((L_eb*W**2/2) - L_ab*A*E*(d-e))/(a*d)+(e*(a+b)); Fb = (A*E*(d-e)+(d*Fc))/e; Fa = (W*L_ag-Fb-Fc)
 temp_c = Fc/A;temp_b = Fb/A
 
@@ -157,7 +162,7 @@ if temp_c > E or temp_b > E :
     st.warning("O arame ultrapassou o limite tente novamente")
     st.stop()
 else:
-    st.warning("O arame não ultrapassou o limite tente")  
+    st.warning("O arame não ultrapassou o limite")  
 
 D_b=(Fb*L_eb)/(A*E); D_c=(Fc*d)/(A*E); D_g=(D_c*L_ag)/(a+b); E_eb=D_b/e;E_dc=D_c/d
 
