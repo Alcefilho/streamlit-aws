@@ -106,7 +106,7 @@ st.write(f"""
 ## Programa para ajudar o constutor civíl tomar decisões 
 """)
 
-st.write('''[!fig](https://figrema.s3.amazonaws.com/rema-fig.jpg)''')
+st.write('''![fig](https://figrema.s3.amazonaws.com/rema-fig.jpg)''')
     
 carga_dist = st.number_input('Insira o valor (em Newton/metro) da carga distribuída w')
 if not carga_dist or carga_dist < 0:
