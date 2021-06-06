@@ -12,8 +12,6 @@ import streamlit as st
 import streamlit as st
 import base64
 
-#x = st.slider('x')  
-#st.write(x, 'squared is', x * x)
 #############################################################################################
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Usuario   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<#
 #############################################################################################
@@ -47,6 +45,8 @@ import base64
 #iii) Deverão deixar claro quais são as unidades de entrada para cada parâmetro e quais são as
 #unidades de saída de seus resultados. Eliminando desta forma compreensões erradas;
 
+
+
 def download_link(object_to_download, download_filename, download_link_text):
     if isinstance(object_to_download,pd.DataFrame):
         object_to_download = object_to_download.to_csv(index=False)
@@ -65,10 +65,7 @@ name = st.sidebar.selectbox(
     'Conversor de unidades',
     ('Unidades de Força e Pressão', 'Unidades de Comprimento')
 )
-
-
-        
-        
+             
 if name == "Unidades de Comprimento":
     if st.sidebar.checkbox('Metros para Milíetros'):
         number = st.sidebar.number_input('Insira o valor em Metros')
@@ -107,54 +104,59 @@ st.write(f"""
 """)
 
 st.write('''![fig](https://figrema.s3.amazonaws.com/rema-fig.jpg)''')
-    
-carga_dist = st.number_input('Insira o valor (em Newton/metro) da carga distribuída w')
-if not carga_dist or carga_dist < 0:
-    alert()
-    st.stop()
 
-escoamento = st.number_input('Por favor insira o valor (em Pascal) do limite de escoamento dos arames')
-if not escoamento or escoamento < 0:
-    alert()
-    st.stop()
-
-
-elasticidade = st.number_input('Por favor insira o valor (em Pascal) do Módulo de elasticidade dos arames')
-if not elasticidade or elasticidade < 0:
-    alert()
-    st.stop()
 for i in range(1):
+    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames")
+    if not diam or diam < 0:
+        alert()
+        st.stop() 
+             
+    carga_dist = st.number_input('Insira o valor (em Newton/metro) da carga distribuída w')
+    if not carga_dist or carga_dist < 0:
+        alert()
+        st.stop()
+
+    escoamento = st.number_input('Por favor insira o valor (em Pascal) do limite de escoamento dos arames')
+    if not escoamento or escoamento < 0:
+        alert()
+        st.stop()
+        
+    elasticidade = st.number_input('Por favor insira o valor (em Pascal) do Módulo de elasticidade dos arames')
+    if not elasticidade or elasticidade < 0:
+        alert()
+        st.stop()
+        
     a = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos AB")
     if not a or a < 0:
         alert()
         st.stop()
+        
     b = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos BC")
     if not b or b < 0:
         alert()
         st.stop()
+        
     c = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos CG")
     if not c or c < 0:
         alert()
         st.stop()
-    
-for i in range(1):
+        
     e = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos EB")
     if e < 0 or not e:
         alert()
-        st.stop()    
+        st.stop() 
+           
     d = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos DC")
     if not d or d < 0 or d > e:
         st.warning('Lembrando que o comprimento DC tem que ser menor ou igual o comprimento EB')
         alert()
         st.stop()  
-    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro d")
-    if not diam or diam < 0:
-        st.warning('Lembrando que o comprimento DC tem que ser menor ou igual o comprimento EB')
-        alert()
-        st.stop()         
+       
         
 ag = a+b+c; E = elasticidade; A = math.pi*diam**2/4; L_ab = a; L_ag = ag; L_eb = e
+
 W = carga_dist; Fc = ((L_eb*W**2/2) - L_ab*A*E*(d-e))/(a*d)+(e*(a+b)); Fb = (A*E*(d-e)+(d*Fc))/e; Fa = (W*L_ag-Fb-Fc)
+
 temp_c = Fc/A;temp_b = Fb/A
 
 my_bar = st.progress(0)
