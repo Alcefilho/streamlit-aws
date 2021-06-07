@@ -68,25 +68,31 @@ name = st.sidebar.selectbox(
              
 if name == "Unidades de Comprimento":
     if st.sidebar.checkbox('Metros para Milíetros'):
-        number = st.sidebar.number_input('Insira o valor em Metros')
-        st.sidebar.write(f''' **{number*1000}** Milímetros''')
+        number1 = st.sidebar.number_input('Insira o valor em Metros')
+        st.sidebar.write(f''' **{number1*1000}** Milímetros''')
     if st.sidebar.checkbox('Milímetros para Metros'):
         number2 = st.sidebar.number_input('Insira o valor em Milímetros')
         st.sidebar.write(f''' **{number2/1000}** Metros''')
         
 if name == "Unidades de Força e Pressão":
-    if st.sidebar.checkbox('Newtons para KiloNewtons'):
-        number6 = st.sidebar.number_input('Insira o valor em N')
-        st.sidebar.write(f''' **{number6*1000}** KN''')
     if st.sidebar.checkbox('Newtons/metro² para Pascal'):
         number3 = st.sidebar.number_input('Insira o valor em N/m²')
         st.sidebar.write(f''' **{number3*1}** Pa''')
+    if st.sidebar.checkbox('Newtons para KiloNewtons'):
+        number4 = st.sidebar.number_input('Insira o valor em N')
+        st.sidebar.write(f''' **{number4/1000}** KN''')
+    if st.sidebar.checkbox('Pascal para GigaPascal'):
+        number5 = st.sidebar.number_input('Insira o valor em GigaPascal')
+        st.sidebar.write(f''' **{number5/1000000000}** Pascal''') 
+    if st.sidebar.checkbox('Pascal para MegaPascal'):
+        number6 = st.sidebar.number_input('Insira o valor em MegaPascal')
+        st.sidebar.write(f''' **{number6*1000000}** Pascal''')       
     if st.sidebar.checkbox('GigaPascal para Pascal'):
-        number4 = st.sidebar.number_input('Insira o valor em GigaPascal')
-        st.sidebar.write(f''' **{number4*1000000000}** Pascal''') 
+        number7 = st.sidebar.number_input('Insira o valor em GigaPascal')
+        st.sidebar.write(f''' **{number7*1000000000}** Pascal''') 
     if st.sidebar.checkbox('MegaPascal para Pascal'):
-        number5 = st.sidebar.number_input('Insira o valor em MegaPascal')
-        st.sidebar.write(f''' **{number5*1000000}** Pascal''')           
+        number8 = st.sidebar.number_input('Insira o valor em MegaPascal')
+        st.sidebar.write(f''' **{number8*1000000}** Pascal''')           
             
     
 #if st.sidebar.button('Código fonte'):
@@ -148,7 +154,7 @@ for i in range(1):
            
     d = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos DC")
     if not d or d < 0 or d > e:
-        st.warning('Lembrando que o comprimento DC tem que ser menor ou igual o comprimento EB')
+        st.warning('Lembrando que o comprimento DC tem que ser menor ou igual ao comprimento EB')
         alert()
         st.stop()  
        
@@ -157,17 +163,26 @@ ag = a+b+c; E = elasticidade; A = math.pi*diam**2/4; L_ab = a; L_ag = ag; L_eb =
 
 W = carga_dist; Fc = ((L_eb*W**2/2) - L_ab*A*E*(d-e))/(a*d)+(e*(a+b)); Fb = (A*E*(d-e)+(d*Fc))/e; Fa = (W*L_ag-Fb-Fc)
 
-temp_c = Fc/A;temp_b = Fb/A
+temp_c = Fc/A; temp_b = Fb/A
 
 my_bar = st.progress(0)
 
 for percent_complete in range(100):
     time.sleep(0.001)
     my_bar.progress(percent_complete + 1)
+
+if temp_c > E and temp_b > E :
+    st.warning("Os dois arames (DC e EB) ultrapassaram o limite de escoamento, tente novamente")
+    st.stop() 
     
-if temp_c > E or temp_b > E :
-    st.warning("O arame ultrapassou o limite tente novamente")
+if temp_c > E  :
+    st.warning("O arame DC ultrapassou o limite de escoamento, tente novamente")
     st.stop()
+    
+if temp_b > E :
+    st.warning("O arame EB ultrapassou o limite de escoamento, tente novamente")
+    st.stop()
+        
 else:
     st.warning("O arame não ultrapassou o limite")  
 
@@ -183,9 +198,9 @@ st.write(f'''### Os deslocamentos dos pontos B, C e G são:
 * Arame D = **{round(E_dc,2)}** sem unidades \n
 ---
 ### As reações de apoio são:
-* No ponto A = **{round(Fa,2)}** N/m 
-* No ponto E = **{round(Fb,2)}** N/m 
-* No ponto D = **{round(Fc,2)}** N/m
+* No ponto A = **{round(Fa,2)}** N 
+* No ponto E = **{round(Fb,2)}** N 
+* No ponto D = **{round(Fc,2)}** N
 ''')
    
 output = f'''\t RESULTADO DO RELATÓRIO DO REMA \n
@@ -194,7 +209,7 @@ B = {round(D_b,2)} m C = {round(D_c,2)} m G = {round(D_g,2)} m \n
 As deformações dos arames de apoio são: 
 Arame EB = {round(E_eb,2)} sem unidades Arame DC D = {round(E_dc,2)} sem unidades \n
 As reações de apoio são:
-No ponto A = {round(Fa,2)} N/m E = {round(Fb,2)} N/m D = {round(Fc,2)} N/m
+No ponto A = {round(Fa,2)} N E = {round(Fb,2)} N D = {round(Fc,2)} N
 '''
 
 if st.button('Download'):
