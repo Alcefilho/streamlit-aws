@@ -167,7 +167,7 @@ elasticidade = elasticidade*1000000000 # Giga
         
 ag = a+b+c; E = elasticidade; A = math.pi*diam**2/4; L_ab = a; L_ag = ag; L_eb = e
 
-W = carga_dist; Fc = ((L_eb*W**2/2) - L_ab*A*E*(d-e))/(a*d)+(e*(a+b)); Fb = (A*E*(d-e)+(d*Fc))/e; Fa = (W*L_ag-Fb-Fc)
+W = carga_dist; Fc = ((L_eb*W*L_ag**2/2) - L_ab*A*E*(d-e))/(a*d)+(e*(a+b)); Fb = (A*E*(d-e)+(d*Fc))/e; Fa = (W*L_ag-Fb-Fc)
 
 temp_c = Fc/A; temp_b = Fb/A
 
@@ -195,9 +195,9 @@ else:
 D_b=(Fb*L_eb)/(A*E); D_c=(Fc*d)/(A*E); D_g=(D_c*L_ag)/(a+b); E_eb=D_b/e;E_dc=D_c/d
 
 st.write(f'''### Os deslocamentos dos pontos B, C e G são:
-* Ponto B = **{round(D_b,2)}** m 
-* Ponto C = **{round(D_c,2)}** m 
-* Ponto G = **{round(D_g,2)}** m \n
+* Ponto B = **{round(D_b,5)}** m 
+* Ponto C = **{round(D_c,5)}** m 
+* Ponto G = **{round(D_g,5)}** m \n
 ---
 ### As deformações dos arames de apoio são: 
 * Arame EB = **{round(E_eb,2)}** sem unidades  
@@ -211,7 +211,7 @@ st.write(f'''### Os deslocamentos dos pontos B, C e G são:
    
 output = f'''\t RESULTADO DO RELATÓRIO DO REMA \n
 Os deslocamentos dos pontos B, C e G são:
-B = {round(D_b,2)} m C = {round(D_c,2)} m G = {round(D_g,2)} m \n
+B = {round(D_b,5)} m C = {round(D_c,5)} m G = {round(D_g,5)} m \n
 As deformações dos arames de apoio são: 
 Arame EB = {round(E_eb,2)} sem unidades Arame DC D = {round(E_dc,2)} sem unidades \n
 As reações de apoio são:
