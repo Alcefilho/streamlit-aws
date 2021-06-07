@@ -117,7 +117,7 @@ for i in range(1):
         alert()
         st.stop() 
              
-    carga_dist = st.number_input('Insira o valor (em Newton/metro) da carga distribuída w')
+    carga_dist = st.number_input('Insira o valor (em Newton/metro) da carga distribuída w',step=1)
     if not carga_dist or carga_dist < 0:
         alert()
         st.stop()
