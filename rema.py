@@ -112,22 +112,22 @@ st.write(f"""
 st.write('''![fig](https://figrema.s3.amazonaws.com/rema-fig.jpg)''')
 
 for i in range(1):
-    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames",format="%.5f")
+    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames",step=1e-5,format="%.5f")
     if not diam or diam < 0:
         alert()
         st.stop() 
              
-    carga_dist = st.number_input('Insira o valor (em Newton/metro) da carga distribuída w',step=1)
+    carga_dist = st.number_input('Insira o valor (em KN/metro) da carga distribuída w',step=1)
     if not carga_dist or carga_dist < 0:
         alert()
         st.stop()
 
-    escoamento = st.number_input('Por favor insira o valor (em Pascal) do limite de escoamento dos arames')
+    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames')
     if not escoamento or escoamento < 0:
         alert()
         st.stop()
-        
-    elasticidade = st.number_input('Por favor insira o valor (em Pascal) do Módulo de elasticidade dos arames')
+         
+    elasticidade = st.number_input('Por favor insira o valor (em GigaPascal) do Módulo de elasticidade dos arames')
     if not elasticidade or elasticidade < 0:
         alert()
         st.stop()
@@ -158,6 +158,12 @@ for i in range(1):
         alert()
         st.stop()  
        
+#Conversão de unidades
+carga_dist = carga_dist*1000 # Kilo
+escoamento = escoamento*1000000 # Mega
+elasticidade = elasticidade*1000000000 # Giga
+
+
         
 ag = a+b+c; E = elasticidade; A = math.pi*diam**2/4; L_ab = a; L_ag = ag; L_eb = e
 
@@ -194,13 +200,13 @@ st.write(f'''### Os deslocamentos dos pontos B, C e G são:
 * Ponto G = **{round(D_g,2)}** m \n
 ---
 ### As deformações dos arames de apoio são: 
-* Arame EB = **{round(E_eb,2)}** sem unidades Arame DC 
-* Arame D = **{round(E_dc,2)}** sem unidades \n
+* Arame EB = **{round(E_eb,2)}** sem unidades  
+* Arame DC = **{round(E_dc,2)}** sem unidades \n
 ---
 ### As reações de apoio são:
-* No ponto A = **{round(Fa,2)}** N 
-* No ponto E = **{round(Fb,2)}** N 
-* No ponto D = **{round(Fc,2)}** N
+* No ponto A = **{abs(round(Fa,2))}** N 
+* No ponto E = **{abs(round(Fb,2))}** N 
+* No ponto D = **{abs(round(Fc,2))}** N
 ''')
    
 output = f'''\t RESULTADO DO RELATÓRIO DO REMA \n
@@ -209,7 +215,7 @@ B = {round(D_b,2)} m C = {round(D_c,2)} m G = {round(D_g,2)} m \n
 As deformações dos arames de apoio são: 
 Arame EB = {round(E_eb,2)} sem unidades Arame DC D = {round(E_dc,2)} sem unidades \n
 As reações de apoio são:
-No ponto A = {round(Fa,2)} N E = {round(Fb,2)} N D = {round(Fc,2)} N
+No ponto A = {abs(round(Fa,2))} N E = {abs(round(Fb,2))} N D = {abs(round(Fc,2))} N
 '''
 
 if st.button('Download'):
