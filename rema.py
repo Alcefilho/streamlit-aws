@@ -108,17 +108,17 @@ st.write(f"""
 st.write('''![fig](https://figrema.s3.amazonaws.com/rema-fig.jpg)''')
 
 for i in range(1):
-    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames",step=1e-3,format="%1.5f")
+    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames",format="%1.5f")
     if not diam or diam < 0:
         alert()
         st.stop() 
              
-    carga_dist = st.number_input('Insira o valor (em KN/metro) da carga distribuída w pretendida', step=1, format="%.5f")
+    carga_dist = st.number_input('Insira o valor (em KN/metro) da carga distribuída w pretendida', format="%.5f")
     if not carga_dist or carga_dist < 0:
         alert()
         st.stop()
 
-    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames', step=10, format="%.3f")
+    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames', format="%.3f")
     if not escoamento or escoamento < 0:
         alert()
         st.stop()
