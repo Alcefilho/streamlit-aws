@@ -102,42 +102,43 @@ expander.write(""" **Luiz Yokoyama Felix de Souza ** \n
 st.write(f"""
 # Bem Vindo ao REMA
 ## Programa para ajudar o constutor civil tomar decisões 
+### Este programa calcula a carga distribuída necessária para a barra ficar na horizontal, partindo de uma **pequena** inclinação. 
 """)
 
 st.write('''![fig](https://figrema.s3.amazonaws.com/rema-fig.jpg)''')
 
 for i in range(1):
-    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames",step=1e-4,format="%.5f")
+    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames",step=1e-3,format="%.5f")
     if not diam or diam < 0:
         alert()
         st.stop() 
              
-    carga_dist = st.number_input('Insira o valor (em KN/metro) da carga distribuída w', step=1)
+    carga_dist = st.number_input('Insira o valor (em KN/metro) da carga distribuída w pretendida', step=1, format="%.5f")
     if not carga_dist or carga_dist < 0:
         alert()
         st.stop()
 
-    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames', step=10)
+    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames', step=10, format="%.3f")
     if not escoamento or escoamento < 0:
         alert()
         st.stop()
          
-    elasticidade = st.number_input('Por favor insira o valor (em GigaPascal) do Módulo de elasticidade dos arames', step=10)
+    elasticidade = st.number_input('Por favor insira o valor (em GigaPascal) do Módulo de elasticidade dos arames', step=10format="%.3f")
     if not elasticidade or elasticidade < 0:
         alert()
         st.stop()
         
-    a = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos AB")
+    a = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos AB", step=1e-3, format="%.3f")
     if not a or a < 0:
         alert()
         st.stop()
         
-    b = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos BC")
+    b = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos BC", step=1e-3, format="%.3f")
     if not b or b < 0:
         alert()
         st.stop()
         
-    c = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos CG")
+    c = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos CG", step=1e-3, format="%.3f")
     if not c or c < 0:
         alert()
         st.stop()
@@ -149,7 +150,7 @@ for i in range(1):
            
     d = st.number_input("Por favor insira o valor (em metros) da distância entre os pontos DC", step=1e-4,format="%.5f")
     if not d or d < 0 or d > e:
-        st.warning('Lembrando que o comprimento DC tem que ser menor ou igual ao comprimento EB, com a barra partindo de uma pequena inclinação!')
+        st.warning('Lembrando que o comprimento DC tem que ser menor ou igual ao comprimento EB, já que a barra deve partir de uma pequena inclinação!')
         alert()
         st.stop()  
        
@@ -162,7 +163,8 @@ elasticidade = elasticidade*1000000000 # Giga
 
 ag = a+b+c; E = elasticidade; A = math.pi*diam**2/4; L_ab = a; L_ag = ag; L_eb = e; L_ac = a+b; L_dc = d
 
-W_fornecido = carga_dist; 
+W_fornecido = carga_dist; #Fc = ((L_eb*W*L_ag**2/2) - L_ab*A*E*(d-e))/(a*d)+(e*(a+b)); Fb = (A*E*(d-e)+(d*Fc))/e; Fa = (W*L_ag-Fb-Fc)
+
 Dc = L_ac*(L_eb-L_dc)/(L_ac-L_ab)
 Db = L_ab*Dc/L_ac
 Db = abs(Db)
@@ -214,7 +216,7 @@ st.write(f'''### Os deslocamentos dos pontos B, C e G são:
 ---
 ### Com as medidas de arame fornecidas, a carga w necessária para a estrutura ficar na horizontal seria:
 * w = **{abs(round(W,5))}** N/m 
-* Para o w fornecido, existe uma diferença de = **{round(W_dif,5)}** N/m 
+* Para o w fornecido, existe uma diferença de **{round(W_dif,5)}** N/m 
 ### Você pode modificar as medidas até obter o resultado desejado.
 ''')
 
