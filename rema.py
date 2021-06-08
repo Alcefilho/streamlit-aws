@@ -118,12 +118,12 @@ for i in range(1):
         alert()
         st.stop()
 
-    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames',step=0.001, format="%1.5f")
+    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames',step=0.001, format="%.3f")
     if not escoamento or escoamento < 0:
         alert()
         st.stop()
          
-    elasticidade = st.number_input('Por favor insira o valor (em GigaPascal) do Módulo de elasticidade dos arames', step=10, format="%.3f")
+    elasticidade = st.number_input('Por favor insira o valor (em GigaPascal) do Módulo de elasticidade dos arames', step=10.0, format="%.3f")
     if not elasticidade or elasticidade < 0:
         alert()
         st.stop()
