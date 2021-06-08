@@ -200,8 +200,8 @@ st.write(f'''### Os deslocamentos dos pontos B, C e G são:
 * Ponto G = **{round(D_g,5)}** m \n
 ---
 ### As deformações dos arames de apoio são: 
-* Arame EB = **{round(E_eb,2)}** sem unidades  
-* Arame DC = **{round(E_dc,2)}** sem unidades \n
+* Arame EB = **{round(E_eb,5)}** sem unidades  
+* Arame DC = **{round(E_dc,5)}** sem unidades \n
 ---
 ### As reações de apoio são:
 * No ponto A = **{abs(round(Fa,2))}** N 
@@ -213,7 +213,7 @@ output = f'''\t RESULTADO DO RELATÓRIO DO REMA \n
 Os deslocamentos dos pontos B, C e G são:
 B = {round(D_b,5)} m C = {round(D_c,5)} m G = {round(D_g,5)} m \n
 As deformações dos arames de apoio são: 
-Arame EB = {round(E_eb,2)} sem unidades Arame DC D = {round(E_dc,2)} sem unidades \n
+Arame EB = {round(E_eb,5)} sem unidades Arame DC D = {round(E_dc,5)} sem unidades \n
 As reações de apoio são:
 No ponto A = {abs(round(Fa,2))} N E = {abs(round(Fb,2))} N D = {abs(round(Fc,2))} N
 '''
