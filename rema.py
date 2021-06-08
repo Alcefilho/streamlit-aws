@@ -118,7 +118,7 @@ for i in range(1):
         alert()
         st.stop()
 
-    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames', format="%.3f")
+    escoamento = st.number_input('Por favor insira o valor (em MegaPascal) do limite de escoamento dos arames',step=.001, format="%1.3f")
     if not escoamento or escoamento < 0:
         alert()
         st.stop()
