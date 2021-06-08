@@ -167,7 +167,7 @@ elasticidade = elasticidade*1000000000 # Giga
         
 ag = a+b+c; E = elasticidade; A = math.pi*diam**2/4; L_ab = a; L_ag = ag; L_eb = e
 
-W = carga_dist; Fc = ((L_eb*W*L_ag**2/2) - L_ab*A*E*(d-e))/(a*d)+(e*(a+b)); Fb = (A*E*(d-e)+(d*Fc))/e; Fa = (W*L_ag-Fb-Fc)
+W = carga_dist; Fc = (((L_eb*W*(L_ag**2))/2) - L_ab*A*E*(d-e))/(a*d)+(e*(a+b)); Fb = (A*E*(d-e)+(d*Fc))/e; Fa = (W*L_ag-Fb-Fc)
 
 temp_c = Fc/A; temp_b = Fb/A
 
