@@ -108,7 +108,7 @@ st.write(f"""
 st.write('''![fig](https://figrema.s3.amazonaws.com/rema-fig.jpg)''')
 
 for i in range(1):
-    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames",step=1e-3)
+    diam = st.number_input("Por favor insira o valor (em metros) do diâmetro dos arames",step=1e-3,format="%.5f")
     if not diam or diam < 0:
         alert()
         st.stop() 
