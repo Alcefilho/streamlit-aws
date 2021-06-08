@@ -123,7 +123,7 @@ for i in range(1):
         alert()
         st.stop()
          
-    elasticidade = st.number_input('Por favor insira o valor (em GigaPascal) do Módulo de elasticidade dos arames', step=10format="%.3f")
+    elasticidade = st.number_input('Por favor insira o valor (em GigaPascal) do Módulo de elasticidade dos arames', step=10, format="%.3f")
     if not elasticidade or elasticidade < 0:
         alert()
         st.stop()
