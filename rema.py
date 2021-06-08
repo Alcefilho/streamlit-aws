@@ -190,7 +190,7 @@ if temp_b > E :
     st.stop()
         
 else:
-    st.warning("O arame não ultrapassou o limite")  
+    st.warning("Os arames não ultrapassaram o limite de escoamento")  
 
 D_b=(Fb*L_eb)/(A*E); D_c=(Fc*d)/(A*E); D_g=(D_c*L_ag)/(a+b); E_eb=D_b/e;E_dc=D_c/d
 
